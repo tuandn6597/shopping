@@ -1,0 +1,581 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/themify-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/selectFX/css/cs-skin-elastic.css}">
+
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <style>
+        .imagecontainer{
+            position:relative;
+            width:100%;
+            max-width:400px;
+
+        }
+        .overlay{
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            height:100%;
+            width:100%;
+            opacity:0;
+            transition:.3s ease;
+            border-radius: 50%;
+
+        }
+        .imagecontainer:hover .overlay{
+            opacity: 1;
+        }
+        .icon{
+            color:white;
+            font-size:40px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            text-align:center;
+
+        }
+    </style>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+<body>
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href=".."><img th:src="@{/images/logo.png}" alt="Logo"></a>
+            <a class="navbar-brand hidden" href=".."><img th:src="@{/images/logo2.png}" alt="Logo"></a>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a th:href="@{/}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Components</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/catalogs}">Catalog</a></li>
+                        <li><i class="fa fa-id-badge"></i><a th:href="@{/products}">Product</a></li>
+                        <li><i class="fa fa-bars"></i><a th:href="@{/producers}">Producer</a></li>
+                        <li><i class="fa fa-share-square-o"></i><a th:href="@{/transactions}">Transaction</a></li>
+
+                        <li><i class="fa fa-id-card-o"></i><a th:href="@{/customers}">Customer</a></li>
+                        <li><i class="fa fa-exclamation-triangle"></i><a th:href="@{/promotions}">Promotion</a></li>
+                        <li><i class="fa fa-spinner"></i><a th:href="@{/details}">Detail</a></li>
+
+                    </ul>
+                </li>
+
+
+
+                <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-sign-in"></i><a th:href="@{/login}">Login</a></li>
+                        <li><i class="menu-icon fa fa-sign-in"></i><a th:href="@{/register}">Register</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                <div class="header-left">
+                    <button class="search-trigger"><i class="fa fa-search"></i></button>
+                    <div class="form-inline">
+                        <form class="search-form" th:action="@{/product/search}" method="GET" >
+                            <input class="form-control mr-sm-2" name="Name" type="text" placeholder="Search by name product" aria-label="Search">
+                            <input type="submit" value="search" class="btn btn-info">
+                            <button class="search-close" ><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <span class="count bg-danger">5</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                            <p class="red">You have 3 Notification</p>
+                            <a class="dropdown-item media bg-flat-color-1" href="#">
+                                <i class="fa fa-check"></i>
+                                <p>Server #1 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-4" href="#">
+                                <i class="fa fa-info"></i>
+                                <p>Server #2 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-5" href="#">
+                                <i class="fa fa-warning"></i>
+                                <p>Server #3 overloaded.</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown for-message">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                id="message"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ti-email"></i>
+                            <span class="count bg-primary">9</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="message">
+                            <p class="red">You have 4 Mails</p>
+                            <a class="dropdown-item media bg-flat-color-1" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/1.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Jonathan Smith</span>
+                                    <span class="time float-right">Just now</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-4" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/2.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Jack Sanders</span>
+                                    <span class="time float-right">5 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-5" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/3.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Cheryl Wheeler</span>
+                                    <span class="time float-right">10 minutes ago</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-3" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/4.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Rachel Santos</span>
+                                    <span class="time float-right">15 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="user-area dropdown float-right">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" style="margin-top: 6px;">
+                        HELLO: admin@gmail.com
+                    </div>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" th:src="@{/images/admin.png}" alt="User Avatar">
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+
+
+                        <a class="nav-link" th:href="@{/logout_page}"><i class="fa fa-power-off"></i> Logout</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Table</a></li>
+                        <li class="active">Product</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-success
+                     alert-dismissible fade show" role="alert" th:if="${successmessage}">
+                    <strong th:text="${successmessage}"></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="alert alert-danger
+                     alert-dismissible fade show" role="alert" th:if="${erromessage}">
+                        <strong th:text="${erromessage}"></strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title text-center" th:text="${isAdd==true ? 'Add product':'Update product'}">Add Product</strong>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data" th:action="@{${isAdd==true ? '/save' : '/update'}}" th:object="${product}" class="was-validated">
+
+                                    <div class="form-group col">
+
+                                        <input type="hidden" th:field="*{id}" class="form-control" id="formGroupExampleInput" >
+                                    </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="formGroupExampleInput">Tên Sản phẩm</label>
+                                        <input type="text" th:field="*{name}" class="form-control" id="formGroupExampleInput1" placeholder="name">
+                                    </div>
+
+                                    <div class="form-group col">
+                                        <label for="formGroupExampleInput2">Giá</label>
+                                        <input type="text" th:field="*{price}" class="form-control" id="formGroupExampleInput2" placeholder="price">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="formGroupExampleInput2">Giảm giá (%)</label>
+                                        <input type="text" th:field="*{discount}" class="form-control" id="formGroupExampleInput3" placeholder="discount">
+                                    </div>
+
+
+                                    <div class="form-group col">
+                                        <label for="exampleFormControlSelect1">Thuộc Danh mục</label>
+                                        <select th:field="*{catalog}" class="form-control" id="exampleFormControlSelect1">
+                                            <option th:each="cata : ${catalog}"
+                                                    th:text="${cata.name}"
+                                                    th:value="${cata.id_catalog}"
+
+
+                                            >
+
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="exampleFormControlSelect1">Thuộc Nhà Sản Xuất</label>
+                                        <select th:field="*{producer}" class="form-control" id="exampleFormControlSelect2">
+                                            <option th:each="pro : ${producer}"
+                                                    th:text="${pro.name_producer}"
+                                                    th:value="${pro.id}"
+
+
+                                            >
+
+                                            </option>
+
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group col">
+                                        <label for="exampleFormControlSelect1">Quà khuyến mãi</label>
+                                        <select th:field="*{promotion}" class="form-control" id="exampleFormControlSelect3">
+                                            <option th:each="pro : ${promotions}"
+                                                    th:text="${pro.nameFree}"
+                                                    th:value="${pro.id}"
+
+
+                                            >
+
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                    <div class="form-group">
+                                        <input type="file" class="form-control"  th:field="*{files}" multiple />
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput2" th:text="${isAdd ==false ?'Images' :''}"></label><br>
+                                        <span th:each="file,itrStart : ${productFiles}" class="imagecontainer" th:id="'imageindex'+${itrStart.index}">
+                                         <img th:src="@{'/images/'+${file.modifiledFileName}}" style="width:80px;height: 80px;border-radius: 50%;
+                                              margin-right:10px" class="image" th:if="${file.fileExtension != 'pdf' and file.fileExtension !='xlsx'}" alt="">
+
+                                            <span class="overlay">
+
+                                                <a href="" class="icon image-confirm-delete" title="image delete" th:attr="data-id=${itrStart.index},data-name=${file.modifiledFileName}">
+
+                                                    <i class="fa fa-trash" style="color:red;"></i>
+                                                </a>
+                                            </span>
+
+
+
+                                        </span>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" th:field="*{removeImages}" id="removeImages">
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary" th:text="${isAdd==true ? 'Add' : 'Update'}"></button>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Product Table</strong>
+                        </div>
+                        <div th:if="${!products.isEmpty()}">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">CreateDate</th>
+                                        <th scope="col">Catalog</th>
+                                        <th scope="col">Producer</th>
+                                        <th scope="col">Promotion</th>
+                                       <!-- <th scope="col">Images</th>-->
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                        <th scope="col">Views Detail</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="product : ${products}">
+                                        <th scope="row" th:text="${product.id}"></th>
+                                        <td th:text="${product.name}"></td>
+                                        <td th:text="${product.price}"></td>
+                                        <td th:text="${product.discount}"> </td>
+                                        <td th:text="${product.create_date}"> </td>
+                                        <td th:text="${product.catalog.name}"> </td>
+                                        <td th:text="${product.producer.name_producer}"> </td>
+                                        <div th:if="${product.promotion}">
+                                            <td th:text="${product.promotion.nameFree}" > </td>
+                                        </div>
+                                        <div th:unless="${product.promotion}">
+                                            <td  >Không có khuyến mãi </td>
+                                        </div>
+
+
+
+                                        <td ><a th:href="${'/product/edit/'+product.id}" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+
+                                        <td ><a th:href="${'/product/delete/'+product.id}" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                        <td><a th:href="${'/product/view/'+product.id}" id="modelLink" class="confirm btn btn-outline-info" th:attr="data-id=${product.id} ,data-name= ${product.name}"><i class="fa fa-list-alt"></i></a></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div th:unless="${!products.isEmpty()}">
+                            <div class="alert alert-warning" role="alert">
+                               Dữ liệu bạn cần tìm không có!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div th:if="${!isSearch}">
+                        <div class="col-md-1">
+                            <select class="form-control" id="pageSizeSelect">
+                                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+                            </select>
+                        </div>
+
+                        <nav aria-label="Page navigation example" style="    margin-left: 50px;" th:if="${products.totalPages != 1}">
+                            <ul class="pagination">
+                                <li th:class="${products.number == 0} ? disabled" class="page-item">
+                                    <a class="page-link" th:href="@{/products/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                                </li>
+                                <li th:class="${products.number == 0} ? disabled" class="page-item">
+                                    <a class="page-link" th:href="@{/products/(pageSize=${selectedPageSize}, page=${products.number})}">&larr;</a>
+                                </li>
+                                <li th:class="${products.number == (page - 1)} ? 'active pointer-disabled'"
+                                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}" class="page-item">
+                                    <a class="page-link" th:href="@{/products/(pageSize=${selectedPageSize}, page=${page})}"
+                                       th:text="${page}"></a>
+                                </li>
+                                <li th:class="${products.number + 1 == products.totalPages} ? disabled" class="page-item">
+                                    <a class="page-link"
+                                       th:href="@{/products/(pageSize=${selectedPageSize}, page=${products.number + 2})}">&rarr;</a>
+                                </li>
+                                <li th:class="${products.number + 1 == products.totalPages} ? disabled" class="page-item">
+                                    <a class="page-link"
+                                       th:href="@{/products/(pageSize=${selectedPageSize}, page=${products.totalPages})}">&raquo;</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal" id="myModel" tabindex="-1" role="dialog" th:fragment="modelContents">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="model-id">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="mode-name">Modal body text goes here.</p>
+                                <img src="" alt="">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+
+</div><!-- /#right-panel -->
+
+<!-- Right Panel -->
+
+
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/vendors/popper.js/dist/umd/popper.min.js}"></script>
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script type="text/javascript">
+    jQuery(function($){
+       var images=[];
+       $('.image-confirm-delete').on('click',function(e){
+        e.preventDefault();
+        var id=$(this).data('id');
+        var name=$(this).data('name');
+        images.push(name);
+           $('#imageindex'+id).hide();
+           $('#removeImages').val((images));
+        /*   $('#removeImages').val(JSON.stringify(images));*/
+          /* var value = $('#removeImages').val(); //retrieve array
+           var value1 = JSON.parse(value);
+           console.log(value);*/
+
+
+
+
+
+        });
+       /* $('.confirm').on('click',function(e){
+            e.preventDefault();
+            var id=$(this).data('id');
+            var name=$(this).data('name');
+            console.log("cac");
+            $("#model-id").html(id);
+            $("#mode-name").html(name);
+
+            $.ajax({
+                type : 'GET',
+                contentType : 'application/json',
+                url : '/product-file/'+id,
+                data : JSON.stringify(id),
+                dataType: "json",
+
+                success : function(result) {
+                  alert("sucess");
+                },
+                error : function(e) {
+                    alert("Error!")
+
+                }
+            });
+
+
+
+
+
+
+
+        });*/
+        $('#pageSizeSelect').on('change', function() {
+            console.log('abc');
+            window.location.replace("/products/?pageSize=" + this.value + "&page=1");
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

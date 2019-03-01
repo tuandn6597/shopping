@@ -1,0 +1,447 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"  class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+
+    <link rel="stylesheet" th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/themify-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/selectFX/css/cs-skin-elastic.css}">
+
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+
+        .mySlides{
+            width:500px;
+            display:none;
+            height:500px;
+        }
+        .image{
+            width: 100px;
+            border: 1px solid #80808061;
+            margin-right: 10px;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            height:80px;
+        }
+        li{
+            list-style: none;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href=".."><img th:src="@{/images/logo.png}" alt="Logo"></a>
+            <a class="navbar-brand hidden" href=".."><img th:src="@{/images/logo2.png}" alt="Logo"></a>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a th:href="@{/}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Components</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/catalogs}">Catalog</a></li>
+                        <li><i class="fa fa-id-badge"></i><a th:href="@{/products}">Product</a></li>
+                        <li><i class="fa fa-bars"></i><a th:href="@{/producers}">Producer</a></li>
+                        <li><i class="fa fa-share-square-o"></i><a th:href="@{/transactions}">Transaction</a></li>
+                        <li><i class="fa fa-id-card-o"></i><a th:href="@{/customers}">Customer</a></li>
+                        <li><i class="fa fa-exclamation-triangle"></i><a th:href="@{/promotions}">Promotion</a></li>
+                        <li><i class="fa fa-spinner"></i><a th:href="@{/details}">Detail</a></li>
+                    </ul>
+                </li>
+
+
+
+                <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-sign-in"></i><a th:href="@{/login}">Login</a></li>
+                        <li><i class="menu-icon fa fa-sign-in"></i><a th:href="@{/register}">Register</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                <div class="header-left">
+                    <button class="search-trigger"><i class="fa fa-search"></i></button>
+                    <div class="form-inline">
+                        <form class="search-form">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                            <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <span class="count bg-danger">5</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                            <p class="red">You have 3 Notification</p>
+                            <a class="dropdown-item media bg-flat-color-1" href="#">
+                                <i class="fa fa-check"></i>
+                                <p>Server #1 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-4" href="#">
+                                <i class="fa fa-info"></i>
+                                <p>Server #2 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-5" href="#">
+                                <i class="fa fa-warning"></i>
+                                <p>Server #3 overloaded.</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown for-message">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                id="message"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ti-email"></i>
+                            <span class="count bg-primary">9</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="message">
+                            <p class="red">You have 4 Mails</p>
+                            <a class="dropdown-item media bg-flat-color-1" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/1.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Jonathan Smith</span>
+                                    <span class="time float-right">Just now</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-4" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/2.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Jack Sanders</span>
+                                    <span class="time float-right">5 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-5" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/3.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Cheryl Wheeler</span>
+                                    <span class="time float-right">10 minutes ago</span>
+                                        <p>Hello, this is an example msg</p>
+                                </span>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-3" href="#">
+                                <span class="photo media-left"><img alt="avatar" th:src="@{/images/avatar/4.jpg}"></span>
+                                <span class="message media-body">
+                                    <span class="name float-left">Rachel Santos</span>
+                                    <span class="time float-right">15 minutes ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="user-area dropdown float-right">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" style="margin-top: 6px;">
+                        HELLO: admin@gmail.com
+                    </div>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" th:src="@{/images/admin.png}" alt="User Avatar">
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+
+
+                        <a class="nav-link" th:href="@{/logout_page}"><i class="fa fa-power-off"></i> Logout</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Table</a></li>
+                        <li class="active">View Product</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="row mb-3 ml-3">
+
+                        <div  th:each="file,itrStart : ${productFiles}">
+                            <div class="mySlides">
+
+                            <img th:src="@{'/images/'+${file.modifiledFileName}}"  th:if="${file.fileExtension != 'pdf' and file.fileExtension !='xlsx'}" style="width:100%;height:100%;">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row ml-3">
+                        <div  th:each="file,itrStart : ${productFiles}">
+                        <div class="column image">
+                            <img th:src="@{'/images/'+${file.modifiledFileName}}"  th:if="${file.fileExtension != 'pdf' and file.fileExtension !='xlsx'}" th:onclick="'currentSlide(\''+${itrStart.index+1}+'\')'"  style="width:100%;height:100%;">
+
+                        </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-6" th:object="${products}" >
+                    <ul style="display:flex;" >
+                        <li class="vendor mr-3"><i class="fa fa-gg" aria-hidden="true"></i><span style="font-weight: bold;font-size:12px;">Thương hiệu:</span>  <span th:text="${products.producer.name_producer}"></span> </li>
+                        <li class="type mr-3"><i class="fa fa-tags" aria-hidden="true"></i><span style="font-weight: bold;font-size:12px;">Loại:</span>  <span th:text="${products.catalog.name}"></span> </li>
+<!--
+                        <li class="sku"><i class="fa fa-codepen" aria-hidden="true"></i><span style="font-weight: bold;font-size:12px;">SKU:</span>  <span>PH315-51-7533</span> </li>
+-->
+                    </ul>
+                    <hr>
+                    <div >
+                        <span style="font-weight: bold;font-size:12px;">Giá :</span> <span style="color:red" th:text="${products.price}">34.5000 $</span>$
+                    </div>
+                    <hr>
+                    <ul>
+                        <li>✓ Bảo hành: 24 tháng chính hãng</li>
+                        <li>✓ Đổi mới sản phẩm trong 30 ngày</li>
+                        <li>✓ Kho: Hàng có sẵn</li>
+                    </ul>
+                    <hr>
+                    <div >
+                        <img src="https://file.hstatic.net/1000233206/file/gifbox_compact.png" width="30" height="30" alt="">
+                        Khuyến mãi:
+                        <br>
+
+                        <ul th:if="${products.promotion}">
+                            <li th:text="'✓'+${products.promotion.nameFree}">✓ Balo ASUS ROG trị giá 400.000đ</li>
+                        </ul>
+                        <ul th:unless="${products.promotion}">
+                            <li >✓ Không có khuyến mãi</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <ul class="listPolicy">
+
+
+                        <li class="item">
+                            <div class="box d-flex mb-3">
+                                <div class="icon mr-2">
+                                    <img src="//theme.hstatic.net/1000233206/1000372993/14/product_policy_1.png?v=621" alt="Giao hàng">
+                                </div>
+                                <div class="detail">
+                                    <h5 style="text-transform: uppercase;
+              font-size: 13px;">
+                                        Giao hàng
+                                    </h5>
+
+                                    <span>Miễn phí giao hàng trong nội thành TP.HCM</span>
+
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="item">
+                            <div class="box d-flex mb-3">
+                                <div class="icon mr-2">
+                                    <img src="//theme.hstatic.net/1000233206/1000372993/14/product_policy_2.png?v=621" alt="Sản phẩm">
+                                </div>
+                                <div class="detail">
+                                    <h5 style="text-transform: uppercase;
+              font-size: 13px;">
+                                        Sản phẩm
+                                    </h5>
+
+                                    <span>Cam kết hàng mới 100% <div> Bảo hành chính hãng
+
+            </div>
+          </span></div>
+                            </div></li>
+
+
+
+
+
+
+                        <li class="item">
+                            <div class="box d-flex mb-3">
+                                <div class="icon mr-2">
+                                    <img src="//theme.hstatic.net/1000233206/1000372993/14/product_policy_3.png?v=621" alt="Đổi trả">
+                                </div>
+                                <div class="detail">
+                                    <h5 style="text-transform: uppercase;
+              font-size: 13px;">
+                                        Đổi trả
+                                    </h5>
+
+                                    <span>Đổi mới sản phẩm từ 7 - 30 ngày</span>
+
+                                </div>
+                            </div>
+                        </li>
+
+
+
+
+
+
+                        <li class="item">
+                            <div class="box d-flex mb-3">
+                                <div class="icon mr-2">
+                                    <img src="//theme.hstatic.net/1000233206/1000372993/14/product_policy_4.png?v=621" alt="Hỗ trợ">
+                                </div>
+                                <div class="detail">
+                                    <h5 style="text-transform: uppercase;
+              font-size: 13px;">
+                                        Hỗ trợ
+                                    </h5>
+
+                                    <span>Hotline: 034 6083 862 <br>Trả góp: 034 6083 862 <br>Bảo hành: 034 6083 862</span>
+
+                                </div>
+                            </div>
+                        </li>
+
+
+
+
+
+
+                        <li class="item">
+                            <div class="box d-flex">
+                                <div class="icon mr-2">
+                                    <img src="//theme.hstatic.net/1000233206/1000372993/14/product_policy_5.png?v=621" alt="CHẤP NHẬN THANH TOÁN">
+                                </div>
+                                <div class="detail">
+                                    <h5 style="text-transform: uppercase;
+              font-size: 13px;">
+                                        CHẤP NHẬN THANH TOÁN
+                                    </h5>
+
+                                    <span><img src="//theme.hstatic.net/1000233206/1000372993/14/product_policy_5_2.png?v=621"></span>
+
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+
+</div><!-- /#right-panel -->
+
+<!-- Right Panel -->
+
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/vendors/popper.js/dist/umd/popper.min.js}"></script>
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slides[slideIndex-1].style.display = "block";
+
+    }
+</script>
+
+
+
+</body>
+
+</html>
